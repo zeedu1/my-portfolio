@@ -2,21 +2,70 @@
 
 import { useEffect, useState } from "react";
 
-export function useTypewriter(text: string, speed = 120) {
-  const [output, setOutput] = useState("");
+type UseTypewriterOptions = {
+  typingSpeed?: number;
+  deletingSpeed?: number;
+  pauseDuration?: number;
+};
+
+export function useTypewriter(
+  words: string[],
+  {
+    typingSpeed = 120,
+    deletingSpeed = 70,
+    pauseDuration = 1500,
+  }: UseTypewriterOptions = {}
+) {
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const currentWord = words[currentWordIndex];
 
   useEffect(() => {
-    let i = 0;
+    let timeoutId: NodeJS.Timeout;
 
-    const interval = setInterval(() => {
-      setOutput(text.slice(0, i));
-      i++;
+    const isTypingComplete = displayText === currentWord;
+    const isDeletingComplete = displayText === "";
 
-      if (i > text.length) clearInterval(interval);
-    }, speed);
+    // PAUSE BEFORE STARTING DELETE
+    if (isTypingComplete && !isDeleting) {
+      timeoutId = setTimeout(() => {
+        setIsDeleting(true);
+      }, pauseDuration);
 
-    return () => clearInterval(interval);
-  }, [text, speed]);
+      return () => clearTimeout(timeoutId);
+    }
 
-  return output;
+    // MOVE TO NEXT WORD
+    if (isDeletingComplete && isDeleting) {
+      setIsDeleting(false);
+
+      setCurrentWordIndex((prevIndex) =>
+        prevIndex === words.length - 1 ? 0 : prevIndex + 1
+      );
+
+      return;
+    }
+
+    timeoutId = setTimeout(() => {
+      const nextText = isDeleting
+        ? currentWord.slice(0, displayText.length - 1)
+        : currentWord.slice(0, displayText.length + 1);
+
+      setDisplayText(nextText);
+    }, isDeleting ? deletingSpeed : typingSpeed);
+
+    return () => clearTimeout(timeoutId);
+  }, [
+    currentWord,
+    displayText,
+    isDeleting,
+    words,
+    typingSpeed,
+    deletingSpeed,
+    pauseDuration,
+  ]);
+
+  return displayText;
 }
