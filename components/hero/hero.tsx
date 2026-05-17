@@ -8,7 +8,7 @@ export default function Hero() {
   const text = useTypewriter([
     "Euree John Fernandez",
     "a BSIT Student",
-    "an Aspiring Web Developer",
+    "an Aspiring Web Dev.",
   ]);
 
   const heroRef = useRef<HTMLElement>(null);

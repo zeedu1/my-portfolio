@@ -23,12 +23,10 @@ export default function Navbar() {
 
   return (
     <nav className="border-b border-black bg-[#22223b] text-white shadow-sm sticky top-0 z-50">
-      
       {/* TOP BAR */}
       <div className="flex items-center justify-between px-4 sm:px-6 lg:px-10 py-4">
-        
         {/* LOGO */}
-        <h1 className="font-pixel text-3xl text-yellow-400 drop-shadow-[4px_4px_0px_#000] opacity-0 animate-fadeInLeft">
+        <h1 className="font-pixel text-lg sm:text-xl text-yellow-300 drop-shadow-[4px_4px_0px_#000] opacity-0 animate-fadeInLeft">
           Eu_Fer
         </h1>
 
@@ -99,7 +97,7 @@ export default function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              onClick={closeMenu}   // ⭐ AUTO CLOSE FIX
+              onClick={closeMenu} // ⭐ AUTO CLOSE FIX
               style={{ animationDelay: `${index * 80}ms` }}
               className="
                 font-pixel
