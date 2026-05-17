@@ -48,16 +48,17 @@ export default function Hero() {
         {/* TITLE */}
         <h1
           className={`
-            font-pixel text-xl sm:text-2xl md:text-3xl lg:text-4xl
-            text-yellow-400 drop-shadow-[4px_4px_0px_#000]
-            leading-tight transition-all duration-700
-            ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}
+          font-mono
+          text-xl sm:text-2xl md:text-3xl lg:text-4xl
+          text-yellow-400
+          drop-shadow-[4px_4px_0px_#000]
+          leading-tight
+          transition-all duration-700
+          ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}
           `}
-        >
-          Hi, I am {text}
-          <span className="animate-pulse text-white text-2xl sm:text-3xl md:text-4xl ml-1">
-            |
-          </span>
+          >
+          Hello, I am {text}
+          <span className="animate-pulse text-white ml-1">|</span>
         </h1>
 
         {/* INTRO BOX */}
@@ -70,7 +71,7 @@ export default function Hero() {
             ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
           `}
         >
-          <p className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-md md:max-w-lg">
+          <p className="font-mono text-gray-300 text-sm sm:text-base leading-relaxed max-w-md md:max-w-xl">
             I am a 4th-year Bachelor of Science in Information Technology
             student with a strong interest in web development. I have experience
             building web applications through our capstone project, which helped
@@ -81,23 +82,36 @@ export default function Hero() {
             technologies, with the goal of becoming a competent and reliable
             full-stack developer in the future.
           </p>
-        </div>
 
-        {/* BUTTON */}
-        <button
-          className={`
-            font-pixel border-2 border-black bg-yellow-500
-            px-2.5 py-1.5 text-[10px] sm:text-xs text-black
-            rounded shadow-[3px_3px_0px_#000]
-            transition-all duration-700 delay-300
-            hover:bg-yellow-400 hover:translate-x-[2px]
-            hover:translate-y-[2px] hover:shadow-none
-            active:translate-x-[3px] active:translate-y-[3px]
-            ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
-          `}
-        >
-          View Projects
-        </button>
+          {/* BUTTON INSIDE INTRO */}
+          <div className="mt-4">
+            <button
+              className="
+                relative z-10
+                font-mono
+                font-bold
+                border-2 border-black
+                bg-yellow-500
+                px-2.5 py-1.5
+                text-[10px] sm:text-xs
+                text-black
+                rounded
+                shadow-[3px_3px_0px_#000]
+                cursor-pointer
+                transition-all duration-200
+                hover:bg-yellow-400
+                hover:translate-x-[2px]
+                hover:translate-y-[2px]
+                hover:shadow-none
+                active:translate-x-[3px]
+                active:translate-y-[3px]
+                focus:outline-none
+              "
+            >
+              View Projects
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* RIGHT SIDE */}

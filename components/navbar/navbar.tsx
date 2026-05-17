@@ -40,7 +40,8 @@ export default function Navbar() {
               href={link.href}
               style={{ animationDelay: `${index * 80}ms` }}
               className="
-                font-pixel
+                font-mono
+                font-bold
                 border-2 border-black
                 bg-yellow-500
                 px-3 py-1.5
