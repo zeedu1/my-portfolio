@@ -1,5 +1,6 @@
 "use client";
 
+import { FaFacebook } from "react-icons/fa";
 import { useTypewriter } from "@/hooks/useTypewriter";
 import { useEffect, useState, useRef } from "react";
 import { useInView } from "@/hooks/useInView";
@@ -40,23 +41,23 @@ export default function Hero() {
       {/* LEFT SIDE */}
       <div
         className={`
-          relative z-10 flex-1 space-y-3 md:space-y-4
-          transition-all duration-700 ease-out
-          ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
-        `}
+    relative z-10 flex-1 space-y-3 md:space-y-4
+    transition-all duration-700 ease-out
+    ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
+  `}
       >
         {/* TITLE */}
         <h1
           className={`
-          font-mono
-          text-xl sm:text-2xl md:text-3xl lg:text-4xl
-          text-yellow-400
-          drop-shadow-[4px_4px_0px_#000]
-          leading-tight
-          transition-all duration-700
-          ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}
-          `}
-          >
+      font-mono
+      text-xl sm:text-2xl md:text-3xl lg:text-4xl
+      text-yellow-400
+      drop-shadow-[4px_4px_0px_#000]
+      leading-tight
+      transition-all duration-700
+      ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}
+    `}
+        >
           Hello, I am {text}
           <span className="animate-pulse text-white ml-1">|</span>
         </h1>
@@ -64,12 +65,12 @@ export default function Hero() {
         {/* INTRO BOX */}
         <div
           className={`
-            relative bg-white/5 border border-white/10
-            backdrop-blur-md rounded-lg p-4 sm:p-5
-            shadow-[0_10px_30px_rgba(0,0,0,0.4)]
-            transition-all duration-700 delay-150
-            ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
-          `}
+      relative bg-white/5 border border-white/10
+      backdrop-blur-md rounded-lg p-4 sm:p-5
+      shadow-[0_10px_30px_rgba(0,0,0,0.4)]
+      transition-all duration-700 delay-150
+      ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
+    `}
         >
           <p className="font-mono text-gray-300 text-sm sm:text-base leading-relaxed max-w-md md:max-w-xl">
             I am a 4th-year Bachelor of Science in Information Technology
@@ -83,33 +84,86 @@ export default function Hero() {
             full-stack developer in the future.
           </p>
 
-          {/* BUTTON INSIDE INTRO */}
-          <div className="mt-4">
+          {/* BUTTONS (FIXED LAYOUT) */}
+          <div className="mt-4 flex flex-wrap gap-3 items-center">
+            {/* View Projects */}
             <button
               className="
-                relative z-10
-                font-mono
-                font-bold
-                border-2 border-black
-                bg-yellow-500
-                px-2.5 py-1.5
-                text-[10px] sm:text-xs
-                text-black
-                rounded
-                shadow-[3px_3px_0px_#000]
-                cursor-pointer
-                transition-all duration-200
-                hover:bg-yellow-400
-                hover:translate-x-[2px]
-                hover:translate-y-[2px]
-                hover:shadow-none
-                active:translate-x-[3px]
-                active:translate-y-[3px]
-                focus:outline-none
-              "
+          relative z-10
+          font-mono font-bold
+          border-2 border-black
+          bg-yellow-500
+          px-2.5 py-1.5
+          text-[10px] sm:text-xs
+          text-black
+          rounded
+          shadow-[3px_3px_0px_#000]
+          cursor-pointer
+          transition-all duration-200
+          hover:bg-yellow-400
+          hover:translate-x-[2px]
+          hover:translate-y-[2px]
+          hover:shadow-none
+          active:translate-x-[3px]
+          active:translate-y-[3px]
+          focus:outline-none
+        "
             >
               View Projects
             </button>
+
+            {/* Download CV */}
+            <button
+              className="
+          relative z-10
+          font-mono font-bold
+          border-2 border-black
+          bg-yellow-500
+          px-2.5 py-1.5
+          text-[10px] sm:text-xs
+          text-black
+          rounded
+          shadow-[3px_3px_0px_#000]
+          cursor-pointer
+          transition-all duration-200
+          hover:bg-yellow-400
+          hover:translate-x-[2px]
+          hover:translate-y-[2px]
+          hover:shadow-none
+          active:translate-x-[3px]
+          active:translate-y-[3px]
+          focus:outline-none
+        "
+            >
+              Download CV
+            </button>
+            <a
+              href="https://www.facebook.com/eureejohn.fernandez.7"
+              target="_blank"
+              className="
+                flex items-center justify-center
+                w-10 h-10
+                border-2 border-black
+                bg-blue-500
+                text-white
+                rounded-full
+                shadow-[3px_3px_0px_#000]
+                transition-all duration-200
+                hover:bg-blue-400
+                hover:translate-x-[2px]
+                hover:translate-y-[2px]
+                hover:shadow-none
+              "
+              >
+              <FaFacebook size={18} />
+            </a>
+          </div>
+
+          {/* MAC STYLE 3 DOTS */}
+          <div className="absolute bottom-2 right-3 flex gap-1">
+            <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+            <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full"></span>
+            <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
           </div>
         </div>
       </div>
