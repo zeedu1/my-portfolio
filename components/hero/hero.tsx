@@ -13,7 +13,7 @@ export default function Hero() {
     <section
       id="hero"
       className="
-        relative w-full min-h-screen
+        relative w-full h-[90.6vh]
         flex flex-col md:flex-row
         items-center justify-between
         px-6 sm:px-10 md:px-16
@@ -26,15 +26,12 @@ export default function Hero() {
       "
     >
       {/* BACKGROUND GLOW */}
-      <div className="absolute inset-0 z-0">
-        <div
-          className="
-            absolute inset-0
-            bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)]
-            bg-[size:45px_45px]
-            opacity-20
-          "
-        />
+      <div className="absolute inset-0 z-0 grid grid-cols-[repeat(auto-fill,minmax(55px,1fr))] auto-rows-[55px]">
+        {Array.from({ length: 378 }).map((_, i) => (
+          <div key={i} className="group border border-white/5">
+            <div className="h-full w-full transition-colors duration-200 group-hover:bg-white/10" />
+          </div>
+        ))}
       </div>
 
       {/* LEFT SIDE */}
