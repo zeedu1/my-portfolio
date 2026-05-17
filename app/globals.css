@@ -92,3 +92,16 @@ html {
 .animate-fadeIn {
   animation: fadeIn 0.8s ease-out forwards;
 }
+
+/* @keyframes draw {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-draw {
+  animation: draw 6s linear infinite;
+} */
