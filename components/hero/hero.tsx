@@ -1,6 +1,5 @@
 "use client";
 
-import { FaFacebook } from "react-icons/fa";
 import { useTypewriter } from "@/hooks/useTypewriter";
 import { useEffect, useState, useRef } from "react";
 import { useInView } from "@/hooks/useInView";
@@ -23,7 +22,6 @@ export default function Hero() {
         flex flex-col md:flex-row
         items-center justify-between
         px-6 sm:px-10 md:px-16
-
         scroll-mt-24 md:scroll-mt-28
         overflow-hidden
         bg-[#0b0f1a]
@@ -137,26 +135,6 @@ export default function Hero() {
             >
               Download CV
             </button>
-            <a
-              href="https://www.facebook.com/eureejohn.fernandez.7"
-              target="_blank"
-              className="
-                flex items-center justify-center
-                w-10 h-10
-                border-2 border-black
-                bg-blue-500
-                text-white
-                rounded-full
-                shadow-[3px_3px_0px_#000]
-                transition-all duration-200
-                hover:bg-blue-400
-                hover:translate-x-[2px]
-                hover:translate-y-[2px]
-                hover:shadow-none
-              "
-              >
-              <FaFacebook size={18} />
-            </a>
           </div>
 
           {/* MAC STYLE 3 DOTS */}
@@ -169,19 +147,42 @@ export default function Hero() {
       </div>
 
       {/* RIGHT SIDE */}
+      {/* RIGHT SIDE */}
       <div
         className={`
-          relative z-10 flex-1 flex justify-end
-          mt-10 md:mt-0 md:pr-6 lg:pr-10
-          transition-all duration-700 delay-200
-          ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"}
-        `}
+    relative z-10 flex-1 flex justify-end
+    mt-10 md:mt-0 md:pr-6 lg:pr-10
+    transition-all duration-700 delay-200
+    ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"}
+  `}
       >
-        <img
-          src="/images/prof.png"
-          alt="Profile"
-          className="w-[200px] sm:w-[260px] md:w-[320px] lg:w-[380px] border-b-2 border-yellow-400"
-        />
+        <div
+          className="
+      relative
+      border-2 border-yellow-400
+      rounded-xl
+      overflow-hidden
+      bg-white/5
+      backdrop-blur-md
+      shadow-[0_10px_30px_rgba(0,0,0,0.5)]
+    "
+        >
+          <img
+            src="/images/prof.png"
+            alt="Profile"
+            className="
+              w-[200px] sm:w-[230px] md:w-[280px] lg:w-[320px]
+              object-cover
+            "
+          />
+
+          {/* SMALL DECOR */}
+          <div className="absolute top-3 left-3 flex gap-1">
+            <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+            <span className="w-2 h-2 bg-yellow-400 rounded-full"></span>
+            <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+          </div>
+        </div>
       </div>
     </section>
   );
