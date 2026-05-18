@@ -3,6 +3,7 @@
 import projects from "@/data/projectsData";
 import useProjectsPagination from "@/hooks/useProjectsPagination";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { useState } from "react";
 
 export default function Projects() {
   const {
@@ -14,6 +15,8 @@ export default function Projects() {
     handleNext,
     handlePrev,
   } = useProjectsPagination(projects, 8);
+
+  const [selectedProject, setSelectedProject] = useState<any>(null);
 
   return (
     <section
@@ -36,12 +39,10 @@ export default function Projects() {
           MY WORKS
         </p>
 
-        <h2 className="font-mono text-2xl sm:text-3xl font-bold">
-          Projects
-        </h2>
+        <h2 className="font-mono text-2xl sm:text-3xl font-bold">Projects</h2>
       </div>
 
-      {/* GRID WRAPPER (FIXED HEIGHT + NO STRETCH ISSUE) */}
+      {/* GRID WRAPPER */}
       <div className="flex-1 flex items-start justify-center">
         <div
           className={`
@@ -85,33 +86,12 @@ export default function Projects() {
               "
             >
               {/* IMAGE */}
-              <div
-                className="
-                  h-[90px]
-                  w-full
-                  border-b border-white/10
-                  bg-gradient-to-br
-                  from-[#111827]
-                  to-[#1f2937]
-                  flex
-                  items-center
-                  justify-center
-                  overflow-hidden
-                  relative
-                "
-              >
+              <div className="h-[90px] w-full border-b border-white/10 bg-gradient-to-br from-[#111827] to-[#1f2937] flex items-center justify-center overflow-hidden relative">
                 {project.image ? (
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="
-                      w-full
-                      h-full
-                      object-cover
-                      transition-transform
-                      duration-300
-                      hover:scale-105
-                    "
+                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                   />
                 ) : (
                   <div className="text-center">
@@ -157,12 +137,21 @@ export default function Projects() {
                   </p>
                 </div>
 
-                {/* DESCRIPTION */}
+                {/* DESCRIPTION (ONLY MODIFIED PART) */}
                 <div className="mt-2 border-t border-white/10 pt-2">
                   <p className="font-mono text-[9px] text-gray-400 leading-relaxed line-clamp-2">
                     <span className="text-yellow-400">Description:</span>{" "}
                     {project.description}
                   </p>
+
+                  {project.description?.length > 80 && (
+                    <button
+                      onClick={() => setSelectedProject(project)}
+                      className="mt-1 text-[9px] text-yellow-400 hover:underline"
+                    >
+                      See more
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -177,26 +166,114 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* PAGINATION (STABLE BOTTOM AREA) */}
+      {/* PAGINATION */}
       <div className="h-10 flex items-center justify-center mt-5">
         {totalPages > 1 ? (
           <div className="flex items-center justify-center gap-3">
+            {/* PREV BUTTON */}
             <button
               onClick={handlePrev}
-              className="w-8 h-8 flex items-center justify-center bg-yellow-400 text-black border border-black shadow-[2px_2px_0px_#000] transition-all duration-200 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:scale-90"
+              className="
+          relative z-10
+          w-8 h-8
+          flex items-center justify-center
+          font-mono font-bold
+          border-2 border-black
+          bg-yellow-500
+          text-black
+          rounded
+          shadow-[3px_3px_0px_#000]
+          cursor-pointer
+          transition-all duration-200
+
+          hover:bg-yellow-400
+          hover:translate-x-[2px]
+          hover:translate-y-[2px]
+          hover:shadow-none
+
+          active:translate-x-[3px]
+          active:translate-y-[3px]
+
+          focus:outline-none
+        "
             >
-              <FaArrowLeft size={10} />
+              <FaArrowLeft size={12} />
             </button>
 
+            {/* MODAL */}
+            {selectedProject && (
+              <div
+                className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+                onClick={() => setSelectedProject(null)}
+              >
+                <div
+                  className="bg-[#111827] border border-white/10 p-4 rounded-lg max-w-md w-full relative"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {/* TITLE */}
+                  <h3 className="text-yellow-400 font-mono text-sm mb-3">
+                    {selectedProject.title}
+                  </h3>
+
+                  {/* DESCRIPTION */}
+                  <p className="text-gray-300 text-xs leading-relaxed mb-10">
+                    {selectedProject.description}
+                  </p>
+
+                  {/* FOOTER BUTTON (BOTTOM LEFT) */}
+                  {/* FOOTER BUTTON (BOTTOM LEFT) */}
+                  <div className="absolute bottom-3 left-3">
+                    <button
+                      onClick={() => setSelectedProject(null)}
+                      className="
+                        text-[10px] font-mono
+                        bg-yellow-400
+                        text-black
+                        px-3 py-[4px]
+                        hover:bg-yellow-300
+                        transition
+                        shadow-[2px_2px_0px_#000]
+                        "
+                      >
+                      CLOSE
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+            {/* PAGE INDICATOR */}
             <p className="font-mono text-[11px] text-gray-300">
               {page + 1} / {totalPages}
             </p>
 
+            {/* NEXT BUTTON */}
             <button
               onClick={handleNext}
-              className="w-8 h-8 flex items-center justify-center bg-yellow-400 text-black border border-black shadow-[2px_2px_0px_#000] transition-all duration-200 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:scale-90"
+              className="
+          relative z-10
+          w-8 h-8
+          flex items-center justify-center
+          font-mono font-bold
+          border-2 border-black
+          bg-yellow-500
+          text-black
+          rounded
+          shadow-[3px_3px_0px_#000]
+          cursor-pointer
+          transition-all duration-200
+
+          hover:bg-yellow-400
+          hover:translate-x-[2px]
+          hover:translate-y-[2px]
+          hover:shadow-none
+
+          active:translate-x-[3px]
+          active:translate-y-[3px]
+
+          focus:outline-none
+        "
             >
-              <FaArrowRight size={10} />
+              <FaArrowRight size={12} />
             </button>
           </div>
         ) : (
