@@ -148,8 +148,25 @@ export default function About() {
               <a
                 href="https://www.facebook.com/eureejohn.fernandez.7"
                 target="_blank"
-                className="inline-flex items-center gap-2 font-mono font-bold border-2 border-black bg-blue-500 px-3 py-2 text-xs sm:text-sm text-white rounded w-fit shadow-[3px_3px_0px_#000] mt-4"
-              >
+                className="
+                    inline-flex items-center gap-2
+                    font-mono font-bold
+                    border-2 border-black
+                    bg-blue-500
+                    px-3 py-2
+                    text-xs sm:text-sm text-white
+                    rounded
+                    w-fit
+                    shadow-[3px_3px_0px_#000]
+                    mt-4
+                    transition-all duration-200
+
+                    hover:bg-blue-400
+                    hover:translate-x-[2px]
+                    hover:translate-y-[2px]
+                    hover:shadow-none
+                  "
+                >
                 <FaFacebook size={16} />
                 Facebook
               </a>
