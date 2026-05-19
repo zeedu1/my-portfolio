@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 import { FaArrowRight, FaArrowLeft, FaFacebook } from "react-icons/fa";
 import Skills from "@/app/skills/skills";
+
 export default function About() {
   const aboutRef = useRef<HTMLElement>(null);
   const isVisible = useInView(aboutRef, { threshold: 0.3 });
@@ -15,35 +16,37 @@ export default function About() {
       id="about"
       className="
         relative w-full min-h-screen
-        px-6 sm:px-10 md:px-16 py-20
+        px-5 sm:px-8 md:px-12 lg:px-16
+        py-20
         bg-[#0b0f1a]
         overflow-hidden
       "
     >
       {/* BACKGROUND GRID */}
-      <div className="absolute inset-0 z-0 grid grid-cols-[repeat(auto-fill,minmax(55px,1fr))] auto-rows-[55px]">
-        {Array.from({ length: 400 }).map((_, i) => (
-          <div key={i} className="group border border-white/5">
-            <div className="h-full w-full transition-colors duration-200 group-hover:bg-white/10" />
+      <div className="absolute inset-0 z-0 grid grid-cols-[repeat(auto-fill,minmax(50px,1fr))] auto-rows-[50px]">
+        {Array.from({ length: 1000 }).map((_, i) => (
+          <div key={i} className="border border-white/5">
+            <div className="h-full w-full hover:bg-white/5 transition-colors duration-200" />
           </div>
         ))}
       </div>
-
       {/* CONTENT */}
       <div
         className={`
           relative z-10
           flex flex-col lg:flex-row
-          items-center gap-12
+          items-center
+          justify-center
+          gap-10 lg:gap-12
           transition-all duration-700
-          mt-10
+          mt-6 sm:mt-10
           ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }
         `}
       >
         {/* LEFT SIDE IMAGE */}
-        <div className="flex-1 flex justify-center">
+        <div className="flex-1 flex justify-center w-full">
           <div
             className="
               relative
@@ -53,13 +56,19 @@ export default function About() {
               bg-white/5
               backdrop-blur-md
               shadow-[0_10px_30px_rgba(0,0,0,0.5)]
+
+              w-full
+              max-w-[240px]
+              sm:max-w-[280px]
+              md:max-w-[340px]
             "
           >
             <img
               src="/images/prof.png"
               alt="About Profile"
               className="
-                w-[240px] sm:w-[280px] md:w-[340px]
+                w-full
+                h-auto
                 object-cover
               "
             />
@@ -73,29 +82,30 @@ export default function About() {
           </div>
         </div>
 
-        <div className="flex-1 max-w-2xl">
+        {/* RIGHT SIDE */}
+        <div className="flex-1 max-w-2xl w-full">
           {/* SECTION TITLE */}
-          <p className="font-mono text-yellow-400 text-sm sm:text-base mb-2 tracking-widest">
+          <p className="font-mono text-yellow-400 text-sm sm:text-base mb-2 tracking-widest text-center lg:text-left">
             {showSkills ? "MY SKILLS" : "ABOUT ME"}
           </p>
 
           {/* HEADING */}
-          <h2 className="font-mono font-bold text-2xl sm:text-3xl md:text-4xl text-white leading-tight mb-6">
+          <h2 className="font-mono font-bold text-2xl sm:text-3xl md:text-4xl text-white leading-tight mb-6 text-center lg:text-left">
             {showSkills ? "What I Know" : "Hello, I am Euree"}
           </h2>
 
           {/* CONTENT BOX */}
           <div
             className="
-          relative
-          bg-white/5
-          border border-white/10
-          backdrop-blur-md
-          rounded-xl
-          p-5 sm:p-6
-          shadow-[0_10px_30px_rgba(0,0,0,0.4)]
-          transition-all duration-500
-        "
+              relative
+              bg-white/5
+              border border-white/10
+              backdrop-blur-md
+              rounded-xl
+              p-5 sm:p-6
+              shadow-[0_10px_30px_rgba(0,0,0,0.4)]
+              transition-all duration-500
+            "
           >
             {/* FADE ANIMATION WRAPPER */}
             <div
@@ -148,25 +158,26 @@ export default function About() {
               <a
                 href="https://www.facebook.com/eureejohn.fernandez.7"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="
-                    inline-flex items-center gap-2
-                    font-mono font-bold
-                    border-2 border-black
-                    bg-blue-500
-                    px-3 py-2
-                    text-xs sm:text-sm text-white
-                    rounded
-                    w-fit
-                    shadow-[3px_3px_0px_#000]
-                    mt-4
-                    transition-all duration-200
+                  inline-flex items-center gap-2
+                  font-mono font-bold
+                  border-2 border-black
+                  bg-blue-500
+                  px-3 py-2
+                  text-xs sm:text-sm text-white
+                  rounded
+                  w-fit
+                  shadow-[3px_3px_0px_#000]
+                  mt-4
+                  transition-all duration-200
 
-                    hover:bg-blue-400
-                    hover:translate-x-[2px]
-                    hover:translate-y-[2px]
-                    hover:shadow-none
-                  "
-                >
+                  hover:bg-blue-400
+                  hover:translate-x-[2px]
+                  hover:translate-y-[2px]
+                  hover:shadow-none
+                "
+              >
                 <FaFacebook size={16} />
                 Facebook
               </a>
@@ -203,7 +214,7 @@ export default function About() {
                 z-20
 
                 ${showSkills ? "top-3" : "bottom-3"}
-                `}
+              `}
             >
               {showSkills ? <FaArrowLeft /> : <FaArrowRight />}
             </button>

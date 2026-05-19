@@ -1,182 +1,244 @@
 "use client";
 
 import { useTypewriter } from "@/hooks/useTypewriter";
-import { useEffect, useState, useRef } from "react";
+import { useRef } from "react";
 import { useInView } from "@/hooks/useInView";
+
 export default function Hero() {
   const text = useTypewriter([
     "Euree John Fernandez",
     "a BSIT Student",
-    "an Aspiring Web Dev.",
+    "an Aspiring Web Developer",
   ]);
 
   const heroRef = useRef<HTMLElement>(null);
-  const isVisible = useInView(heroRef, { threshold: 0.3 });
+  const isVisible = useInView(heroRef, { threshold: 0.2 });
 
   return (
     <section
       ref={heroRef}
       id="hero"
       className="
-        relative w-full h-[90.6vh]
-        flex flex-col md:flex-row
-        items-center justify-between
-        px-6 sm:px-10 md:px-16
-        scroll-mt-24 md:scroll-mt-28
+        relative
+        w-full
+        min-h-screen
+        flex
+        flex-col-reverse
+        lg:flex-row
+        items-center
+        justify-center
+        gap-10
+        px-5
+        sm:px-8
+        md:px-12
+        lg:px-20
+        py-24
         overflow-hidden
         bg-[#0b0f1a]
       "
     >
       {/* BACKGROUND GRID */}
-      <div className="absolute inset-0 z-0 grid grid-cols-[repeat(auto-fill,minmax(55px,1fr))] auto-rows-[55px]">
-        {Array.from({ length: 378 }).map((_, i) => (
-          <div key={i} className="group border border-white/5">
-            <div className="h-full w-full transition-colors duration-200 group-hover:bg-white/10" />
+      <div className="absolute inset-0 z-0 grid grid-cols-[repeat(auto-fill,minmax(50px,1fr))] auto-rows-[50px]">
+        {Array.from({ length: 1000 }).map((_, i) => (
+          <div key={i} className="border border-white/5">
+            <div className="h-full w-full hover:bg-white/5 transition-colors duration-200" />
           </div>
         ))}
       </div>
 
-      {/* LEFT SIDE */}
+      {/* LEFT CONTENT */}
       <div
         className={`
-    relative z-10 flex-1 space-y-3 md:space-y-4
-    transition-all duration-700 ease-out
-    ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
-  `}
+          relative z-10
+          flex-1
+          max-w-2xl
+          text-center
+          lg:text-left
+          transition-all duration-700
+          ${
+            isVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-10"
+          }
+        `}
       >
         {/* TITLE */}
         <h1
-          className={`
-      font-mono
-      text-xl sm:text-2xl md:text-3xl lg:text-4xl
-      text-yellow-400
-      drop-shadow-[4px_4px_0px_#000]
-      leading-tight
-      transition-all duration-700
-      ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}
-    `}
+          className="
+            font-mono
+            font-bold
+            text-2xl
+            sm:text-3xl
+            md:text-4xl
+            lg:text-5xl
+            text-yellow-400
+            leading-tight
+          "
         >
           Hello, I am {text}
-          <span className="animate-pulse text-white ml-1">|</span>
+          <span className="animate-pulse text-white">|</span>
         </h1>
 
-        {/* INTRO BOX */}
+        {/* DESCRIPTION BOX */}
         <div
           className={`
-      relative bg-white/5 border border-white/10
-      backdrop-blur-md rounded-lg p-4 sm:p-5
-      shadow-[0_10px_30px_rgba(0,0,0,0.4)]
-      transition-all duration-700 delay-150
-      ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
-    `}
+            mt-6
+            relative
+            bg-white/5
+            border
+            border-white/10
+            backdrop-blur-md
+            rounded-2xl
+            p-5
+            sm:p-6
+            shadow-[0_10px_30px_rgba(0,0,0,0.4)]
+            transition-all duration-700 delay-150
+            ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            }
+          `}
         >
-          <p className="font-mono text-gray-300 text-sm sm:text-base leading-relaxed max-w-md md:max-w-xl">
-            I am a 4th-year Bachelor of Science in Information Technology
-            student with a strong interest in web development. I have experience
-            building web applications through our capstone project, which helped
-            me gain practical knowledge in both frontend and backend
+          <p
+            className="
+              font-mono
+              text-gray-300
+              text-sm
+              sm:text-base
+              leading-relaxed
+            "
+          >
+            I am a 4th-year Bachelor of Science in Information
+            Technology student with a strong interest in web
+            development. I have experience building web applications
+            through our capstone project, which helped me gain
+            practical knowledge in both frontend and backend
             development.
+
             <br />
-            <br />I am currently improving my skills in modern web development
-            technologies, with the goal of becoming a competent and reliable
-            full-stack developer in the future.
+            <br />
+
+            I am currently improving my skills in modern web
+            development technologies, with the goal of becoming a
+            competent and reliable full-stack developer in the future.
           </p>
 
-          {/* BUTTONS (FIXED LAYOUT) */}
-          <div className="mt-4 flex flex-wrap gap-3 items-center">
-            {/* View Projects */}
+          {/* BUTTONS */}
+          <div
+            className="
+              mt-6
+              flex
+              flex-wrap
+              gap-3
+              justify-center
+              lg:justify-start
+            "
+          >
             <button
               className="
-          relative z-10
-          font-mono font-bold
-          border-2 border-black
-          bg-yellow-500
-          px-2.5 py-1.5
-          text-[10px] sm:text-xs
-          text-black
-          rounded
-          shadow-[3px_3px_0px_#000]
-          cursor-pointer
-          transition-all duration-200
-          hover:bg-yellow-400
-          hover:translate-x-[2px]
-          hover:translate-y-[2px]
-          hover:shadow-none
-          active:translate-x-[3px]
-          active:translate-y-[3px]
-          focus:outline-none
-        "
+                font-mono
+                font-bold
+                border-2
+                border-black
+                bg-yellow-500
+                px-4
+                py-2
+                text-xs
+                sm:text-sm
+                text-black
+                rounded-md
+                shadow-[3px_3px_0px_#000]
+                transition-all
+                duration-200
+                hover:bg-yellow-400
+                hover:translate-x-[2px]
+                hover:translate-y-[2px]
+                hover:shadow-none
+              "
             >
               View Projects
             </button>
 
-            {/* Download CV */}
             <button
               className="
-          relative z-10
-          font-mono font-bold
-          border-2 border-black
-          bg-yellow-500
-          px-2.5 py-1.5
-          text-[10px] sm:text-xs
-          text-black
-          rounded
-          shadow-[3px_3px_0px_#000]
-          cursor-pointer
-          transition-all duration-200
-          hover:bg-yellow-400
-          hover:translate-x-[2px]
-          hover:translate-y-[2px]
-          hover:shadow-none
-          active:translate-x-[3px]
-          active:translate-y-[3px]
-          focus:outline-none
-        "
+                font-mono
+                font-bold
+                border-2
+                border-black
+                bg-yellow-500
+                px-4
+                py-2
+                text-xs
+                sm:text-sm
+                text-black
+                rounded-md
+                shadow-[3px_3px_0px_#000]
+                transition-all
+                duration-200
+                hover:bg-yellow-400
+                hover:translate-x-[2px]
+                hover:translate-y-[2px]
+                hover:shadow-none
+              "
             >
               Download CV
             </button>
           </div>
 
-          {/* MAC STYLE 3 DOTS */}
-          <div className="absolute bottom-2 right-3 flex gap-1">
-            <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
-            <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full"></span>
-            <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+          {/* DOTS */}
+          <div className="absolute bottom-3 right-4 flex gap-1">
+            <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+            <span className="w-2 h-2 bg-yellow-400 rounded-full"></span>
+            <span className="w-2 h-2 bg-green-500 rounded-full"></span>
           </div>
         </div>
       </div>
 
-      {/* RIGHT SIDE */}
-      {/* RIGHT SIDE */}
+      {/* RIGHT IMAGE */}
       <div
         className={`
-    relative z-10 flex-1 flex justify-end
-    mt-10 md:mt-0 md:pr-6 lg:pr-10
-    transition-all duration-700 delay-200
-    ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"}
-  `}
+          relative z-10
+          flex-1
+          flex
+          justify-center
+          items-center
+          transition-all duration-700 delay-200
+          ${
+            isVisible
+              ? "opacity-100 translate-x-0"
+              : "opacity-0 translate-x-10"
+          }
+        `}
       >
         <div
           className="
-      relative
-      border-2 border-yellow-400
-      rounded-xl
-      overflow-hidden
-      bg-white/5
-      backdrop-blur-md
-      shadow-[0_10px_30px_rgba(0,0,0,0.5)]
-    "
+            relative
+            w-full
+            max-w-[220px]
+            sm:max-w-[280px]
+            md:max-w-[340px]
+            lg:max-w-[400px]
+            border-2
+            border-yellow-400
+            rounded-2xl
+            overflow-hidden
+            bg-white/5
+            backdrop-blur-md
+            shadow-[0_10px_30px_rgba(0,0,0,0.5)]
+          "
         >
           <img
             src="/images/prof.png"
             alt="Profile"
             className="
-              w-[200px] sm:w-[230px] md:w-[280px] lg:w-[320px]
+              w-full
+              h-auto
               object-cover
             "
           />
 
-          {/* SMALL DECOR */}
+          {/* TOP DOTS */}
           <div className="absolute top-3 left-3 flex gap-1">
             <span className="w-2 h-2 bg-red-500 rounded-full"></span>
             <span className="w-2 h-2 bg-yellow-400 rounded-full"></span>
