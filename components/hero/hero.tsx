@@ -3,12 +3,12 @@
 import { useTypewriter } from "@/hooks/useTypewriter";
 import { useRef } from "react";
 import { useInView } from "@/hooks/useInView";
-
+import Link from "next/link";
 export default function Hero() {
   const text = useTypewriter([
     "Euree John Fernandez",
-    "a BSIT Student",
-    "an Aspiring Web Developer",
+    "a BSIT Student.",
+    "an Aspiring Web Developer.",
   ]);
 
   const heroRef = useRef<HTMLElement>(null);
@@ -56,9 +56,7 @@ export default function Hero() {
           lg:text-left
           transition-all duration-700
           ${
-            isVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }
         `}
       >
@@ -109,19 +107,15 @@ export default function Hero() {
               leading-relaxed
             "
           >
-            I am a 4th-year Bachelor of Science in Information
-            Technology student with a strong interest in web
-            development. I have experience building web applications
-            through our capstone project, which helped me gain
-            practical knowledge in both frontend and backend
+            I am a 4th-year Bachelor of Science in Information Technology
+            student with a strong interest in web development. I have experience
+            building web applications through our capstone project, which helped
+            me gain practical knowledge in both frontend and backend
             development.
-
             <br />
-            <br />
-
-            I am currently improving my skills in modern web
-            development technologies, with the goal of becoming a
-            competent and reliable full-stack developer in the future.
+            <br />I am currently improving my skills in modern web development
+            technologies, with the goal of becoming a competent and reliable
+            full-stack developer in the future.
           </p>
 
           {/* BUTTONS */}
@@ -136,6 +130,11 @@ export default function Hero() {
             "
           >
             <button
+              onClick={() => {
+                document.getElementById("projects")?.scrollIntoView({
+                  behavior: "smooth",
+                });
+              }}
               className="
                 font-mono
                 font-bold
@@ -159,31 +158,32 @@ export default function Hero() {
             >
               View Projects
             </button>
-
-            <button
-              className="
-                font-mono
-                font-bold
-                border-2
-                border-black
-                bg-yellow-500
-                px-4
-                py-2
-                text-xs
-                sm:text-sm
-                text-black
-                rounded-md
-                shadow-[3px_3px_0px_#000]
-                transition-all
-                duration-200
-                hover:bg-yellow-400
-                hover:translate-x-[2px]
-                hover:translate-y-[2px]
-                hover:shadow-none
-              "
-            >
-              Download CV
-            </button>
+            <Link href="/resume">
+              <button
+                className="
+                  font-mono
+                  font-bold
+                  border-2
+                  border-black
+                  bg-yellow-500
+                  px-4
+                  py-2
+                  text-xs
+                  sm:text-sm
+                  text-black
+                  rounded-md
+                  shadow-[3px_3px_0px_#000]
+                  transition-all
+                  duration-200
+                  hover:bg-yellow-400
+                  hover:translate-x-[2px]
+                  hover:translate-y-[2px]
+                  hover:shadow-none
+                "
+                >
+                Download CV
+              </button>
+            </Link>
           </div>
 
           {/* DOTS */}
@@ -205,9 +205,7 @@ export default function Hero() {
           items-center
           transition-all duration-700 delay-200
           ${
-            isVisible
-              ? "opacity-100 translate-x-0"
-              : "opacity-0 translate-x-10"
+            isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
           }
         `}
       >
