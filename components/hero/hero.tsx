@@ -1,5 +1,6 @@
 "use client";
 
+import { useDownloadFile } from "@/hooks/useDownloadFile";
 import { useTypewriter } from "@/hooks/useTypewriter";
 import { useRef } from "react";
 import { useInView } from "@/hooks/useInView";
@@ -13,7 +14,7 @@ export default function Hero() {
 
   const heroRef = useRef<HTMLElement>(null);
   const isVisible = useInView(heroRef, { threshold: 0.2 });
-
+  const { downloadFile } = useDownloadFile();
   return (
     <section
       ref={heroRef}
@@ -158,9 +159,10 @@ export default function Hero() {
             >
               View Projects
             </button>
-            <Link href="/resume">
-              <button
-                className="
+
+            <button
+              onClick={() => downloadFile("/images/resume.jpg", "resume.jpg")}
+              className="
                   font-mono
                   font-bold
                   border-2
@@ -180,10 +182,9 @@ export default function Hero() {
                   hover:translate-y-[2px]
                   hover:shadow-none
                 "
-                >
-                Download CV
-              </button>
-            </Link>
+            >
+              Download CV
+            </button>
           </div>
 
           {/* DOTS */}
