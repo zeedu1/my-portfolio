@@ -1,5 +1,8 @@
 "use client";
 
+import { useRef } from "react";
+import emailjs from "@emailjs/browser";
+
 import {
   FaFacebookF,
   FaGithub,
@@ -10,6 +13,32 @@ import {
 import { motion } from "framer-motion";
 
 export default function Contact() {
+  const form = useRef<HTMLFormElement>(null);
+
+  const sendEmail = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!form.current) return;
+
+    emailjs
+      .sendForm(
+        "service_053095o",
+        "template_ayx04nc",
+        form.current,
+        "nhxD3fxEFNZ8KDq4N"
+      )
+      .then(
+        () => {
+          alert("Message sent successfully!");
+          form.current?.reset();
+        },
+        (error) => {
+          alert("Failed to send message.");
+          console.log(error);
+        }
+      );
+  };
+
   return (
     <section
       id="contact"
@@ -57,18 +86,9 @@ export default function Contact() {
           {/* SOCIAL LINKS */}
           <div className="flex items-center gap-3 pt-2">
             {[
-              {
-                icon: <FaFacebookF />,
-                link: "https://facebook.com",
-              },
-              {
-                icon: <FaGithub />,
-                link: "https://github.com",
-              },
-              {
-                icon: <FaLinkedinIn />,
-                link: "https://linkedin.com",
-              },
+              { icon: <FaFacebookF />, link: "https://facebook.com" },
+              { icon: <FaGithub />, link: "https://github.com" },
+              { icon: <FaLinkedinIn />, link: "https://linkedin.com" },
             ].map((item, index) => (
               <motion.a
                 key={index}
@@ -92,7 +112,7 @@ export default function Contact() {
           viewport={{ once: true }}
           className="bg-[#111827] border border-white/10 rounded-2xl p-6 md:p-7 shadow-xl"
         >
-          <form className="space-y-5">
+          <form ref={form} onSubmit={sendEmail} className="space-y-5">
             <div>
               <label className="text-sm text-gray-400 block mb-2">
                 Full Name
@@ -100,6 +120,7 @@ export default function Contact() {
 
               <input
                 type="text"
+                name="user_name"
                 placeholder="Enter your name"
                 className="w-full bg-[#0f172a] border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-yellow-400 transition duration-300"
               />
@@ -112,6 +133,7 @@ export default function Contact() {
 
               <input
                 type="email"
+                name="user_email"
                 placeholder="Enter your email"
                 className="w-full bg-[#0f172a] border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-yellow-400 transition duration-300"
               />
@@ -124,6 +146,7 @@ export default function Contact() {
 
               <textarea
                 rows={5}
+                name="message"
                 placeholder="Write your message..."
                 className="w-full bg-[#0f172a] border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-yellow-400 transition duration-300 resize-none"
               ></textarea>
@@ -153,7 +176,7 @@ export default function Contact() {
                 tracking-wider
                 text-sm
               "
-              >
+            >
               Send Message
             </motion.button>
           </form>

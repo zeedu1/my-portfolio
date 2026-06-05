@@ -246,7 +246,7 @@ export default function Resume() {
                   </div>
                   <ul className="mt-1 list-disc list-inside text-gray-700 font-medium text-xs space-y-0.5">
                     <li>
-                      this innovative online application will enable companies,
+                      This innovative online application will enable companies,
                       establishments, and contractors in Panabo City to post job
                       openings, making it easier for job seekers to discover
                       employment opportunities.
@@ -267,7 +267,7 @@ export default function Resume() {
                   </div>
                   <ul className="mt-1 list-disc list-inside text-gray-700 font-medium text-xs space-y-0.5">
                     <li>
-                      n innovative maritime safety mobile application designed
+                      In innovative maritime safety mobile application designed
                       to mitigate risks, enhance emergency responses, and
                       improve maritime security.
                     </li>

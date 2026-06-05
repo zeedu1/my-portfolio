@@ -51,16 +51,12 @@ export default function Projects() {
           flex
           items-start
           justify-center
-
           overflow-y-auto
           overflow-x-hidden
-
           pr-1
-
           max-h-[70vh]
           sm:max-h-[75vh]
           lg:max-h-full
-
           scrollbar-thin
           scrollbar-thumb-yellow-400/40
           scrollbar-track-transparent
@@ -102,7 +98,6 @@ export default function Projects() {
                 overflow-hidden
                 shadow-[0_5px_15px_rgba(0,0,0,0.35)]
                 transition-all duration-300
-
                 hover:-translate-y-1
                 hover:border-yellow-400/30
                 hover:bg-white/10
@@ -121,18 +116,15 @@ export default function Projects() {
                     <p className="font-mono text-[10px] text-yellow-400 tracking-widest">
                       IMAGE HERE
                     </p>
-
                     <div className="mt-2 w-12 h-[2px] bg-yellow-400 mx-auto opacity-50"></div>
                   </div>
                 )}
 
-                {/* EFFECT */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(250,204,21,0.08),transparent_40%)]"></div>
               </div>
 
               {/* CONTENT */}
               <div className="p-3">
-                {/* TITLE */}
                 <div className="mb-2">
                   <p className="font-mono text-[8px] uppercase tracking-widest text-yellow-400 mb-1">
                     Project Title
@@ -143,7 +135,6 @@ export default function Projects() {
                   </h3>
                 </div>
 
-                {/* INFO */}
                 <div className="space-y-[2px]">
                   <p className="font-mono text-[10px] sm:text-[11px] text-gray-300">
                     <span className="text-yellow-400">Name:</span>{" "}
@@ -161,7 +152,6 @@ export default function Projects() {
                   </p>
                 </div>
 
-                {/* DESCRIPTION */}
                 <div className="mt-2 border-t border-white/10 pt-2">
                   <p className="font-mono text-[9px] sm:text-[10px] text-gray-400 leading-relaxed line-clamp-2">
                     <span className="text-yellow-400">Description:</span>{" "}
@@ -179,7 +169,6 @@ export default function Projects() {
                 </div>
               </div>
 
-              {/* DOTS */}
               <div className="absolute top-2 right-2 flex gap-1">
                 <span className="w-1 h-1 bg-red-500 rounded-full"></span>
                 <span className="w-1 h-1 bg-yellow-400 rounded-full"></span>
@@ -194,7 +183,6 @@ export default function Projects() {
       <div className="h-10 flex items-center justify-center mt-6 shrink-0">
         {totalPages > 1 ? (
           <div className="flex items-center justify-center gap-3">
-            {/* PREV BUTTON */}
             <button
               onClick={handlePrev}
               className="
@@ -209,69 +197,21 @@ export default function Projects() {
                 shadow-[3px_3px_0px_#000]
                 cursor-pointer
                 transition-all duration-200
-
                 hover:bg-yellow-400
                 hover:translate-x-[2px]
                 hover:translate-y-[2px]
                 hover:shadow-none
-
                 active:translate-x-[3px]
                 active:translate-y-[3px]
-
-                focus:outline-none
               "
             >
               <FaArrowLeft size={12} />
             </button>
 
-            {/* MODAL */}
-            {selectedProject && (
-              <div
-                className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4"
-                onClick={() => setSelectedProject(null)}
-              >
-                <div
-                  className="bg-[#111827] border border-white/10 p-4 rounded-lg max-w-md w-full relative"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  {/* TITLE */}
-                  <h3 className="text-yellow-400 font-mono text-sm mb-3">
-                    {selectedProject.title}
-                  </h3>
-
-                  {/* DESCRIPTION */}
-                  <p className="text-gray-300 text-xs leading-relaxed mb-10">
-                    {selectedProject.description}
-                  </p>
-
-                  {/* CLOSE BUTTON */}
-                  <div className="absolute bottom-3 left-3">
-                    <button
-                      onClick={() => setSelectedProject(null)}
-                      className="
-                        text-[10px]
-                        font-mono
-                        bg-yellow-400
-                        text-black
-                        px-3 py-[4px]
-                        hover:bg-yellow-300
-                        transition
-                        shadow-[2px_2px_0px_#000]
-                      "
-                    >
-                      CLOSE
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* PAGE INDICATOR */}
             <p className="font-mono text-[11px] text-gray-300">
               {page + 1} / {totalPages}
             </p>
 
-            {/* NEXT BUTTON */}
             <button
               onClick={handleNext}
               className="
@@ -286,16 +226,12 @@ export default function Projects() {
                 shadow-[3px_3px_0px_#000]
                 cursor-pointer
                 transition-all duration-200
-
                 hover:bg-yellow-400
                 hover:translate-x-[2px]
                 hover:translate-y-[2px]
                 hover:shadow-none
-
                 active:translate-x-[3px]
                 active:translate-y-[3px]
-
-                focus:outline-none
               "
             >
               <FaArrowRight size={12} />
@@ -305,6 +241,45 @@ export default function Projects() {
           <div className="text-transparent">.</div>
         )}
       </div>
+
+      {/* ✅ FIXED MODAL (MOVED OUTSIDE GRID / ANIMATION CONTEXT) */}
+      {selectedProject && (
+        <div
+          className="fixed inset-0 bg-black/70 flex items-center justify-center px-4 z-[9999]"
+          onClick={() => setSelectedProject(null)}
+        >
+          <div
+            className="bg-[#111827] border border-white/10 p-4 rounded-lg max-w-md w-full relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-yellow-400 font-mono text-sm mb-3">
+              {selectedProject.title}
+            </h3>
+
+            <p className="text-gray-300 text-xs leading-relaxed mb-10">
+              {selectedProject.description}
+            </p>
+
+            <div className="absolute bottom-3 left-3">
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="
+                  text-[10px]
+                  font-mono
+                  bg-yellow-400
+                  text-black
+                  px-3 py-[4px]
+                  hover:bg-yellow-300
+                  transition
+                  shadow-[2px_2px_0px_#000]
+                "
+              >
+                CLOSE
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
