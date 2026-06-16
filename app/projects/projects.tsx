@@ -1,6 +1,7 @@
 "use client";
 
 import projects from "@/data/projectsData";
+import certificates from "@/data/certificatesData";
 import useProjectsPagination from "@/hooks/useProjectsPagination";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useState } from "react";
@@ -17,6 +18,11 @@ export default function Projects() {
   } = useProjectsPagination(projects, 8);
 
   const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedCertificate, setSelectedCertificate] = useState<any>(null);
+  const [activeTab, setActiveTab] = useState("projects");
+
+  const displayItems =
+    activeTab === "projects" ? visibleProjects : certificates;
 
   return (
     <section
@@ -39,9 +45,35 @@ export default function Projects() {
           MY WORKS
         </p>
 
-        <h2 className="font-mono text-2xl sm:text-3xl font-bold">
-          Projects
-        </h2>
+        <div className="flex items-center justify-between flex-wrap gap-3">
+          <h2 className="font-mono text-2xl sm:text-3xl font-bold">
+            Portfolio
+          </h2>
+
+          <div className="flex gap-2">
+            <button
+              onClick={() => setActiveTab("projects")}
+              className={`px-3 py-1 text-xs font-mono border rounded ${
+                activeTab === "projects"
+                  ? "bg-yellow-400 text-black"
+                  : "border-white/20 text-white"
+              }`}
+            >
+              Projects
+            </button>
+
+            <button
+              onClick={() => setActiveTab("certificates")}
+              className={`px-3 py-1 text-xs font-mono border rounded ${
+                activeTab === "certificates"
+                  ? "bg-yellow-400 text-black"
+                  : "border-white/20 text-white"
+              }`}
+            >
+              Certificates
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* GRID WRAPPER */}
@@ -85,9 +117,16 @@ export default function Projects() {
             }
           `}
         >
-          {visibleProjects.map((project, i) => (
+          {displayItems.map((item: any, i) => (
             <div
               key={i}
+              onClick={() => {
+                if (activeTab === "projects") {
+                  setSelectedProject(item);
+                } else {
+                  setSelectedCertificate(item);
+                }
+              }}
               className="
                 self-start
                 relative
@@ -101,14 +140,15 @@ export default function Projects() {
                 hover:-translate-y-1
                 hover:border-yellow-400/30
                 hover:bg-white/10
+                cursor-pointer
               "
             >
               {/* IMAGE */}
               <div className="h-[110px] sm:h-[120px] w-full border-b border-white/10 bg-gradient-to-br from-[#111827] to-[#1f2937] flex items-center justify-center overflow-hidden relative">
-                {project.image ? (
+                {item.image ? (
                   <img
-                    src={project.image}
-                    alt={project.title}
+                    src={item.image}
+                    alt={item.title}
                     className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                   />
                 ) : (
@@ -116,51 +156,57 @@ export default function Projects() {
                     <p className="font-mono text-[10px] text-yellow-400 tracking-widest">
                       IMAGE HERE
                     </p>
-                    <div className="mt-2 w-12 h-[2px] bg-yellow-400 mx-auto opacity-50"></div>
                   </div>
                 )}
-
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(250,204,21,0.08),transparent_40%)]"></div>
               </div>
 
               {/* CONTENT */}
               <div className="p-3">
                 <div className="mb-2">
                   <p className="font-mono text-[8px] uppercase tracking-widest text-yellow-400 mb-1">
-                    Project Title
+                    {activeTab === "projects"
+                      ? "Project Title"
+                      : "Certificate"}
                   </p>
 
                   <h3 className="font-mono text-[11px] sm:text-xs text-white leading-snug line-clamp-2">
-                    {project.title}
+                    {item.title}
                   </h3>
                 </div>
 
                 <div className="space-y-[2px]">
-                  <p className="font-mono text-[10px] sm:text-[11px] text-gray-300">
-                    <span className="text-yellow-400">Name:</span>{" "}
-                    {project.name}
-                  </p>
+                  {activeTab === "projects" && (
+                    <div className="space-y-[2px]">
+                      <p className="font-mono text-[10px] sm:text-[11px] text-gray-300">
+                        <span className="text-yellow-400">Name:</span>{" "}
+                        {item.name}
+                      </p>
 
-                  <p className="font-mono text-[10px] sm:text-[11px] text-gray-300">
-                    <span className="text-yellow-400">Framework:</span>{" "}
-                    {project.framework}
-                  </p>
+                      <p className="font-mono text-[10px] sm:text-[11px] text-gray-300">
+                        <span className="text-yellow-400">Framework:</span>{" "}
+                        {item.framework}
+                      </p>
 
-                  <p className="font-mono text-[10px] sm:text-[11px] text-gray-300">
-                    <span className="text-yellow-400">Language:</span>{" "}
-                    {project.language}
-                  </p>
+                      <p className="font-mono text-[10px] sm:text-[11px] text-gray-300">
+                        <span className="text-yellow-400">Language:</span>{" "}
+                        {item.language}
+                      </p>
+                    </div>
+                  )}
                 </div>
 
                 <div className="mt-2 border-t border-white/10 pt-2">
                   <p className="font-mono text-[9px] sm:text-[10px] text-gray-400 leading-relaxed line-clamp-2">
                     <span className="text-yellow-400">Description:</span>{" "}
-                    {project.description}
+                    {item.description}
                   </p>
 
-                  {project.description?.length > 80 && (
+                  {item.description?.length > 80 && (
                     <button
-                      onClick={() => setSelectedProject(project)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedProject(item);
+                      }}
                       className="mt-1 text-[9px] sm:text-[10px] text-yellow-400 hover:underline"
                     >
                       See more
@@ -181,30 +227,9 @@ export default function Projects() {
 
       {/* PAGINATION */}
       <div className="h-10 flex items-center justify-center mt-6 shrink-0">
-        {totalPages > 1 ? (
+        {activeTab === "projects" && totalPages > 1 ? (
           <div className="flex items-center justify-center gap-3">
-            <button
-              onClick={handlePrev}
-              className="
-                relative z-10
-                w-8 h-8
-                flex items-center justify-center
-                font-mono font-bold
-                border-2 border-black
-                bg-yellow-500
-                text-black
-                rounded
-                shadow-[3px_3px_0px_#000]
-                cursor-pointer
-                transition-all duration-200
-                hover:bg-yellow-400
-                hover:translate-x-[2px]
-                hover:translate-y-[2px]
-                hover:shadow-none
-                active:translate-x-[3px]
-                active:translate-y-[3px]
-              "
-            >
+            <button onClick={handlePrev}>
               <FaArrowLeft size={12} />
             </button>
 
@@ -212,28 +237,7 @@ export default function Projects() {
               {page + 1} / {totalPages}
             </p>
 
-            <button
-              onClick={handleNext}
-              className="
-                relative z-10
-                w-8 h-8
-                flex items-center justify-center
-                font-mono font-bold
-                border-2 border-black
-                bg-yellow-500
-                text-black
-                rounded
-                shadow-[3px_3px_0px_#000]
-                cursor-pointer
-                transition-all duration-200
-                hover:bg-yellow-400
-                hover:translate-x-[2px]
-                hover:translate-y-[2px]
-                hover:shadow-none
-                active:translate-x-[3px]
-                active:translate-y-[3px]
-              "
-            >
+            <button onClick={handleNext}>
               <FaArrowRight size={12} />
             </button>
           </div>
@@ -242,7 +246,7 @@ export default function Projects() {
         )}
       </div>
 
-      {/* ✅ FIXED MODAL (MOVED OUTSIDE GRID / ANIMATION CONTEXT) */}
+      {/* PROJECT MODAL (UNCHANGED) */}
       {selectedProject && (
         <div
           className="fixed inset-0 bg-black/70 flex items-center justify-center px-4 z-[9999]"
@@ -272,6 +276,50 @@ export default function Projects() {
                   hover:bg-yellow-300
                   transition
                   shadow-[2px_2px_0px_#000]
+                "
+              >
+                CLOSE
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* CERTIFICATE MODAL (NEW - SAFE ADDITION ONLY) */}
+      {selectedCertificate && (
+        <div
+          className="fixed inset-0 bg-black/70 flex items-center justify-center px-4 z-[9999]"
+          onClick={() => setSelectedCertificate(null)}
+        >
+          <div
+            className="bg-[#111827] border border-white/10 rounded-lg max-w-4xl w-full flex overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* LEFT IMAGE */}
+            <div className="w-1/2 bg-black flex items-center justify-center">
+              <img
+                src={selectedCertificate.image}
+                alt={selectedCertificate.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* RIGHT CONTENT */}
+            <div className="w-1/2 p-6 flex flex-col justify-center">
+              <h3 className="text-yellow-400 font-mono text-sm mb-3">
+                {selectedCertificate.title}
+              </h3>
+
+              <p className="text-gray-300 text-xs leading-relaxed">
+                {selectedCertificate.description}
+              </p>
+
+              <button
+                onClick={() => setSelectedCertificate(null)}
+                className="
+                  mt-6 text-[10px] font-mono
+                  bg-yellow-400 text-black px-3 py-1
+                  w-fit hover:bg-yellow-300 transition
                 "
               >
                 CLOSE
